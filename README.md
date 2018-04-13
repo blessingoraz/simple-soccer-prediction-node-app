@@ -6,7 +6,7 @@ The endpoint for the API is hosted [here](https://soccer-prediction.herokuapp.co
 
 Open endpoints require no Authentication.
 
-* [Create](prediction-api): `POST/user/`
+* [Create](#prediction-api): `POST/user/`
 * Login : `POST /login/`
 
 ## Endpoints that require Authentication

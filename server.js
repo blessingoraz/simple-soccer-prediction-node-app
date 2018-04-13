@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 });
 
 // add routes here
-// require('./app/routes/user')(app);
+require('./app/routes/user')(app);
 // require('./app/routes/note')(app);
 
 app.listen(process.env.PORT || port, () => {

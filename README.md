@@ -85,10 +85,18 @@ Used to collect a Token for a registered User.
 
 ## Error Response
 
-**Condition** : If 'email' is not correct.
++ **Condition** : If `email` is not correct.
 ```
   { 
     message: "Email is not correct"
   }
 ```
 **Code** : `500 Internal Error`
+
++ **Condition** : If `email` already exist.
+```
+  { 
+    message: "User with email ["email"] already exist"
+  }
+```
+**Code** : `500 Internal Error `

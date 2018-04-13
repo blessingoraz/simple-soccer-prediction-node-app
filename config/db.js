@@ -1,5 +1,6 @@
-// require('dotenv').config();
+require('dotenv').config();
+// url: 'mongodb://localhost:27017/soccer-prediction'
 
 module.exports = {
-    url: 'mongodb://localhost:27017/soccer-prediction'
+    url: process.env.MONGODB_URI
 };

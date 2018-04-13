@@ -39,7 +39,7 @@ exports.login = (req, res) => {
             res.send(user);
         });
     });
-};
+}; 
 
 exports.findAll =  (req, res) => {
     const token = req.headers['x-access-token'];

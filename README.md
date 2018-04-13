@@ -7,7 +7,7 @@ The endpoint for the API is hosted [here](https://soccer-prediction.herokuapp.co
 Open endpoints require no Authentication.
 
 * [Create](#create-user): `POST/user/`
-* [Login]() : `POST /login/`
+* [Login](#login-user) : `POST /login/`
 
 ## Endpoints that require Authentication
 
@@ -35,8 +35,6 @@ has permissions to access.
 
 
 # Create User
-
-Used to collect a Token for a registered User.
 
 **URL** : `/user/`
 
@@ -66,7 +64,7 @@ Used to collect a Token for a registered User.
 
 ## Success Response
 
-**Code** : `201 OK`
+**Code** : `200 CREATED`
 
 **Content example**
 
@@ -100,3 +98,142 @@ Used to collect a Token for a registered User.
   }
 ```
 **Code** : `500 Internal Error `
+
+# Login User
+
+**URL** : `/login/`
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+**Data constraints**
+
+```json
+{
+    "email": "[valid email address]",
+    "password": "[password in plain text]"
+}
+```
+
+**Data example**
+
+```json
+{
+    "email": "smush.vikings@mk.com",
+    "password": "smushvikings"
+}
+```
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+{
+    "predictions": [],
+    "_id": "5ad0e805fe1e8f00043a948f",
+    "password": "$2a$10$vBmLRnDoRSz9Ahfs4PdrkuSJWf2F5ChDy1IqS3NJsZH6kxQRI1NDm",
+    "username": "Smush Vikings ",
+    "email": "smush.vikings@mk.com",
+    "created_at": "2018-04-13T17:25:25.574Z",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZDBlODA1ZmUxZThmMDAwNDNhOTQ4ZiIsImlhdCI6MTUyMzY0MDMyNSwiZXhwIjoxNTIzNzI2NzI1fQ.DJI8UUl7QXoo-fBJ9sCTCaSVu3kjMgibvqKZqfFKPxI",
+    "__v": 0
+}
+```
+
+## Error Response
+
++ **Condition** : If an error occured.
+```
+  { 
+    message: "Cannot find user with email ["Email"]"
+  }
+```
+**Code** : `500 Internal Error`
+
++ **Condition** : If user is not in the database.
+```
+  { 
+    message: "No user found"
+  }
+```
+**Code** : `404 NOT FOUND `
+
++ **Condition** : If password does not match.
+```
+  { 
+    message: "You cannot login"
+  }
+```
+**Code** : `500 Internal Error `
+
+# GET/DELETE/UPDATE User
+
+**URL** : `/user/:userId`
+
+**Methods** : `GET`, `DELETE`, `PUT`
+
+**Auth required** : YES
+
+**Permissions required** : User is Account Owner
+
+**URL Params**
+
+'id=5ad0e805fe1e8f00043a948f'
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+**GET USER**
+
+```json
+{
+    "predictions": [],
+    "_id": "5ad0e805fe1e8f00043a948f",
+    "password": "$2a$10$vBmLRnDoRSz9Ahfs4PdrkuSJWf2F5ChDy1IqS3NJsZH6kxQRI1NDm",
+    "username": "Smush Vikings ",
+    "email": "smush.vikings@mk.com",
+    "created_at": "2018-04-13T17:25:25.574Z",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZDBlODA1ZmUxZThmMDAwNDNhOTQ4ZiIsImlhdCI6MTUyMzY0MDMyNSwiZXhwIjoxNTIzNzI2NzI1fQ.DJI8UUl7QXoo-fBJ9sCTCaSVu3kjMgibvqKZqfFKPxI",
+    "__v": 0
+}
+```
+
+**DELETE USER**
+```
+{
+    message: 'User deleted' 
+}
+```
+
+
+**UPDATE USER**
+```
+{
+    "predictions": [],
+    "_id": "5ad0e805fe1e8f00043a948f",
+    "password": "$2a$10$vBmLRnDoRSz9Ahfs4PdrkuSJWf2F5ChDy1IqS3NJsZH6kxQRI1NDm",
+    "username": "Smush Vikings ",
+    "email": "smush.vikings@mk.com",
+    "created_at": "2018-04-13T17:25:25.574Z",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZDBlODA1ZmUxZThmMDAwNDNhOTQ4ZiIsImlhdCI6MTUyMzY0MDMyNSwiZXhwIjoxNTIzNzI2NzI1fQ.DJI8UUl7QXoo-fBJ9sCTCaSVu3kjMgibvqKZqfFKPxI",
+    "__v": 0
+}
+```
+
+## Error Response
+
++ **Condition** : If user can not be found.
+```
+  { 
+    message: "message: 'Cannot retrieve user"
+  }
+```
+**Code** : `500 Internal Error`
+
